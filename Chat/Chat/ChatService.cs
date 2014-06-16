@@ -21,8 +21,8 @@ namespace Chat {
       BinaryServerFormatterSinkProvider provider = new BinaryServerFormatterSinkProvider(); 
       provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full; 
       IDictionary props = new Hashtable(); props["port"] = 12345; 
-      TcpChannel chan = new TcpChannel(props, null, provider); 
-      ChannelServices.RegisterChannel(chan); 
+      TcpChannel channel = new TcpChannel(props, null, provider); 
+      ChannelServices.RegisterChannel(channel); 
       RemotingConfiguration.RegisterWellKnownServiceType(typeof(ChatServer), "Chat.ChatServer", WellKnownObjectMode.Singleton);
     }
 
@@ -30,26 +30,38 @@ namespace Chat {
     }
   }
 
-  public class ChatClient : MarshalByRefObject { 
-    public void Reci(string s) { 
-      Console.WriteLine(s); 
+  public class ChatClient : MarshalByRefObject {
+    public string username;
+
+    public ChatClient(string username) {
+      this.username = username;
+    }
+
+    public void Send(string senderUsername, string message) { 
+      Console.WriteLine(senderUsername + ": " + message); 
     } 
   }
 
   public class ChatServer : MarshalByRefObject { 
-    List<ChatClient> lc = new List<ChatClient>(); 
+    List<ChatClient> clientList = new List<ChatClient>();
+
+    public bool UserExist(string username) {
+      if (clientList.Find(client => client.username == username) != null) return true;
+      
+      return false;
+    }
     
-    public void DodajKlijenta(ChatClient c) { 
-      lc.Add(c); 
+    public void AddClient(ChatClient client) {
+      clientList.Add(client); 
     } 
     
-    public void ReciSvima(ChatClient c, string s) { 
-      for (int i = 0; i < lc.Count; ++i) { 
-        try { 
-          if (lc[i] != c) lc[i].Reci(s); 
+    public void SendToAll(ChatClient client, string message) {
+      for (int i = 0; i < clientList.Count; ++i) { 
+        try {
+          if (clientList[i] != client) clientList[i].Send(client.username, message); 
         } 
-        catch { 
-          lc.RemoveAt(i); 
+        catch {
+          clientList.RemoveAt(i); 
           --i; 
         } 
       } 
