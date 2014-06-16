@@ -1,0 +1,34 @@
+﻿Installing assembly 'D:\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe
+Installing service ChatService...
+Creating EventLog source ChatService in log Application...
+Rolling back assembly 'D:\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe
+Restoring event log to previous state for source ChatService.
+Uninstalling assembly 'D:\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe
+Removing EventLog source ChatService.
+Service ChatService is being removed from the system...
+Service ChatService was successfully removed from the system.
+Installing assembly 'D:\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe
+Installing service ChatService...
+Service ChatService has been successfully installed.
+Creating EventLog source ChatService in log Application...
+Committing assembly 'D:\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe

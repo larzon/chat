@@ -1,0 +1,7 @@
+D:\chat\ChatCli\ChatCli\bin\Debug\ChatCli.exe
+D:\chat\ChatCli\ChatCli\bin\Debug\ChatCli.pdb
+D:\chat\ChatCli\ChatCli\bin\Debug\Chat.exe
+D:\chat\ChatCli\ChatCli\bin\Debug\Chat.pdb
+D:\chat\ChatCli\ChatCli\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.exe
+D:\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.pdb
