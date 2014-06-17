@@ -21,8 +21,9 @@ namespace ChatCli {
 
       Console.Write("Korisničko ime: ");
       string username = Console.ReadLine();
-      while (server.UserExists(username)) {
-        Console.Write("Korisnik " + username + " već postoji, izaberite neko drugo korisničko ime: ");
+      while (username == "" || server.UserExists(username)) {
+        if (username == "") Console.Write("Morate unijeti korisničko ime: ");
+        else Console.Write("Korisnik " + username + " već postoji, izaberite neko drugo korisničko ime: ");
         username = Console.ReadLine();
       }
       ChatClient me = new ChatClient(username);
