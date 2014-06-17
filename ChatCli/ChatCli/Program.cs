@@ -21,16 +21,20 @@ namespace ChatCli {
 
       Console.Write("Korisničko ime: ");
       string username = Console.ReadLine();
-      while (server.UserExist(username)) {
+      while (server.UserExists(username)) {
         Console.Write("Korisnik " + username + " već postoji, izaberite neko drugo korisničko ime: ");
         username = Console.ReadLine();
       }
       ChatClient me = new ChatClient(username);
+      server.SendNotification("Korisnik " + username + " se pridružio razgovoru.", me);
       server.AddClient(me);
 
       while (true) {
         string message = Console.ReadLine();
-        if (message == "") break;
+        if (message == "") {
+          server.SendNotification("Korisnik " + username + " je napustio razgovor.", me);
+          break;
+        }
         server.SendToAll(me, message);
       }
     }

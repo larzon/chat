@@ -37,18 +37,23 @@ namespace Chat {
       this.username = username;
     }
 
-    public void Send(string senderUsername, string message) { 
-      Console.WriteLine(senderUsername + ": " + message); 
+    public void Send(string message, string senderUsername = null) {
+      if (senderUsername == null) Console.WriteLine(message);
+      else Console.WriteLine(senderUsername + ": " + message); 
     } 
   }
 
   public class ChatServer : MarshalByRefObject { 
     List<ChatClient> clientList = new List<ChatClient>();
 
-    public bool UserExist(string username) {
-      if (clientList.Find(client => client.username == username) != null) return true;
-      
-      return false;
+    public bool UserExists(string username) {
+      try {
+        if (clientList.Exists(client => client.username == username)) return true;
+        return false;
+      }
+      catch {
+        return false;
+      }
     }
     
     public void AddClient(ChatClient client) {
@@ -58,13 +63,25 @@ namespace Chat {
     public void SendToAll(ChatClient client, string message) {
       for (int i = 0; i < clientList.Count; ++i) { 
         try {
-          if (clientList[i] != client) clientList[i].Send(client.username, message); 
+          if (clientList[i] != client) clientList[i].Send(message, client.username); 
         } 
         catch {
           clientList.RemoveAt(i); 
           --i; 
         } 
       } 
-    } 
+    }
+
+    public void SendNotification(string message, ChatClient client) {
+      for (int i = 0; i < clientList.Count; ++i) {
+        try {
+          if (clientList[i] != client) clientList[i].Send(message);
+        }
+        catch {
+          clientList.RemoveAt(i);
+          --i;
+        }
+      }
+    }
   }
 }
