@@ -19,6 +19,21 @@ namespace ChatCli {
         return;
       }
 
+      Console.WriteLine("Dobrodošli na chat! :)");
+      string clients = "";
+      for (int i = 0; i < server.clientList.Count; ++i) {
+        try {
+          clients += server.clientList[i].username + ", ";
+        }
+        catch {
+          server.RemoveClientAt(i);
+          --i;
+        }
+      }
+      Console.WriteLine("Trenutno u razgovoru sudjeluje " + server.clientList.Count() + " korisnika.");
+      if (clients != "") Console.WriteLine("Trenutni korisnici: " + clients.Substring(0, clients.Length - 2));
+      Console.WriteLine();
+
       Console.Write("Korisničko ime: ");
       string username = Console.ReadLine();
       while (username == "" || server.UserExists(username)) {
@@ -29,6 +44,7 @@ namespace ChatCli {
       ChatClient me = new ChatClient(username);
       server.SendNotification("Korisnik " + username + " se pridružio razgovoru.", me);
       server.AddClient(me);
+      Console.WriteLine();
 
       while (true) {
         string message = Console.ReadLine();

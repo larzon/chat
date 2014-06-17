@@ -44,7 +44,7 @@ namespace Chat {
   }
 
   public class ChatServer : MarshalByRefObject { 
-    List<ChatClient> clientList = new List<ChatClient>();
+    public List<ChatClient> clientList = new List<ChatClient>();
 
     public bool UserExists(string username) {
       try {
@@ -58,7 +58,11 @@ namespace Chat {
     
     public void AddClient(ChatClient client) {
       clientList.Add(client); 
-    } 
+    }
+
+    public void RemoveClientAt(int i) {
+      clientList.RemoveAt(i);
+    }
     
     public void SendToAll(ChatClient client, string message) {
       for (int i = 0; i < clientList.Count; ++i) { 
