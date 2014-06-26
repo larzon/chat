@@ -6,3 +6,5 @@ D:\chat\Chat\Chat\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\chat\Chat\Chat\obj\x86\Debug\GenerateResource.write.1.tlog
 D:\chat\Chat\Chat\obj\x86\Debug\Chat.exe
 D:\chat\Chat\Chat\obj\x86\Debug\Chat.pdb
+C:\Users\Antonio\Documents\GitHub\chat\Chat\Chat\obj\x86\Debug\Chat.exe
+C:\Users\Antonio\Documents\GitHub\chat\Chat\Chat\obj\x86\Debug\Chat.pdb
