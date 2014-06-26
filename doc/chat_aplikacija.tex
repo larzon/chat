@@ -6,7 +6,10 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 
+\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
 \title{Višekorisnička chat aplikacija u C\#-u}
 \author{Antonio Kovačić\\Janko Marohnić\\Lana Arzon}
 
@@ -42,11 +45,37 @@ osoba odjavila iz chata.
 \subsection{Server}
 
 \subsubsection{Kreiranje}
+Windows servis je program koji zapravo radi u pozadini dok je korisnik prijavljen na korisnički račun unutar Windows operativnog sustava. Podešavanjem
+konfiguracija u \texttt{Command Promptu} Windows servis postaje aktivan. Samo kreiranje Windows servisa (detaljnim opisom što radi) se vrši kodiranjem u \textit{C\#}.
+Najprije kreiramo novi projekt u \textit{C\#}, odabirući opciju Windows Service. Zatim
+rekonstruiramo metodu $OnStart$ - dodajemo k\^{o}d za otvaranje (instanciranje)
+kanala, registraciju objekata (dio tog koda \textit{C\#} doda automatski), itd. Zatim
+se instalacija vrši na jednostavan način preko Visual Studia, odnosno \texttt{Command
+Prompta}.
+\lstset{style=sharpc}
+\begin{lstlisting}[numbers=left, breaklines=true]
+protected override void OnStart(string[] args) {
+      BinaryServerFormatterSinkProvider provider = new BinaryServerFormatterSinkProvider(); 
+      provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full; 
+      IDictionary props = new Hashtable(); props["port"] = 12345; //server ce slushati a portu 12345
+      TcpChannel channel = new TcpChannel(props, null, provider); 
+      ChannelServices.RegisterChannel(channel); //registriranje na kanal
+      RemotingConfiguration.RegisterWellKnownServiceType(typeof(ChatServer), "Chat.ChatServer", WellKnownObjectMode.Singleton);//ime servera je "Chat.Chatserver"
+    }
 
+\end{lstlisting}
 \subsubsection{Instaliranje}
-
+Za postavljanje servisa smo napomenuli da ga moramo konfigurirati najprije
+preko \texttt{Command Prompta}. Nakon prevođenja koda Windows servisa, dobivamo binarnu (izvršnu) datoteku Chat.exe. Najprije u \texttt{Command Promptu} trebamo otići u direktorij .NET Framework v. 4 naredbom:\\
+\texttt{cd "C:$\backslash$Windows$\backslash$Microsoft.NET$\backslash$Framework64$\backslash$v4.0.30319"}\\
+Potom naredbom:\\
+\texttt{installutil "C:$\backslash$Ciljni\_ direktorij$\backslash$Chat$\backslash$bin$\backslash$Debug$\backslash$Chat.exe"}\\
+instaliramo dani windows servis.
 \subsubsection{Pokretanje}
-
+Pokretanje servisa se vrši na sljedeći način: pokrenemo \texttt{Administrative tools}
+preko \texttt{Control Panela} (ili preko \texttt{Search programs and files} na startnoj liniji Windowsa. Zatim odaberemo opciju \texttt{Services} u kojoj nađemo \texttt{ChatService}
+(tako smo nazvali naš servis). Lijevim odabirom na opciju \texttt{Start} pokrećemo
+dani servis.
 \begin{figure}[!ht]
 \begin{minipage}{\textwidth}
 \centering
@@ -132,11 +161,10 @@ servise za server, umjesto da smo implementirali svoj vlastiti. Na taj način
 možemo biti sigurni da je taj server optimiziran i za veći broj korisnika.
 Druga je što danas programeri uglavnom provode vrijeme u komandnoj liniji,
 pa činjenica da je naša chat aplikacija napisana kao komandno-linijska aplikacija
-pruža takvim korisnicima već poznato okruženje. Treća prednost je to što kada
-zgasimo računalo, ugasi nam se i servis, pa nemamo problema sa eventualnim
+pruža takvim korisnicima već poznato okruženje. Treća prednost je to što prestankom rada računala, prestane raditi i servis, pa nemamo problema sa eventualnim
 cachiranjem koje bi druge implementacije mogle napraviti.
 
-Neke mane naše implementacije su da, ukoliko korisnik zgasi prozor, naš servis
+Neke mane naše implementacije su da, ukoliko korisnik zatvori prozor, naš servis
 ne registrira da se korisnik odjavio (jer je zapravo došlo do iznimke, a naš
 program trenutno ne obrađuje tu iznimku). Druga mana je da kada korisnik
 piše poruku, a u isto mu vrijeme stigne poruka od nekog drugog korisnika,
