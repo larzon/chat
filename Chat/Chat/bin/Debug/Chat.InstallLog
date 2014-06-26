@@ -306,3 +306,16 @@ Affected parameters are:
    logtoconsole = 
    logfile = D:\chat\Chat\Chat\bin\Debug\Chat.InstallLog
    assemblypath = D:\chat\Chat\Chat\bin\Debug\Chat.exe
+Installing assembly 'C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.exe
+Installing service ChatService...
+Service ChatService has been successfully installed.
+Creating EventLog source ChatService in log Application...
+Committing assembly 'C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.InstallLog
+   assemblypath = C:\Users\Antonio\My Documents\GitHub\chat\Chat\Chat\bin\Debug\Chat.exe
