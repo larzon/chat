@@ -18,13 +18,27 @@
 
 \section{Opis problema}
 
-\section{Server}
+Potrebno je napraviti aplikaciju za gdje se ljudi mogu međusobno dopisivati
+u realnom vremenu. Dvije ili više osoba se treba moći "naći na jednom mjestu",
+i komunicirati zajedno putem tekstualnih poruka.
 
-Server kao Windows servis
+Kada se osoba prijavi u chat, treba upisati svoje korisničko ime, kojim će se
+ta osoba identificirati. Ako je postoji druga osoba u istoj "sobi" koja već
+ima željeno korisničko ime, osoba bi trebala izabrati drugo korisničko ime.
+Nakon što je upisala korisničko ime, osoba mora moći vidjeti koji su sve drugi
+korisnici trenutno prijavljeni u istu "sobu".
 
-\subsection{Windows servis}
+Kada osoba pošalje poruku u grupni chat (napiše teskt i stisne "enter"), svaka
+druga osoba mora primiti tu istu poruku (i treba pisati od koga dolazi). Na taj
+način svatko zna što su svi ostali rekli. I poruke moraju stizati redom kojim
+su poslane.
 
-Što je windows servis?
+Kada se osoba odjavi iz chata, ostalim osobama treba doći poruka da se ta
+osoba odjavila iz chata.
+
+\section{Implementacija}
+
+\subsection{Server}
 
 \subsubsection{Kreiranje}
 
@@ -40,7 +54,7 @@ Server kao Windows servis
 \end{minipage}
 \end{figure}
 
-\section{Klijent}
+\subsection{Klijent}
 
 ...
 
