@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \title{Višekorisnička chat aplikacija u C\#-u}
 \author{Antonio Kovačić\\Janko Marohnić\\Lana Arzon}
@@ -60,12 +61,69 @@ U klijentu nalazimo TCP kanal servisa, i spojimo se na server. Ako servis
 nije upaljen, javljamo grešku.
 
 Zatim ispisujemo poruku dobrodošlice, i vadimo sa servisa sve trenutno prijavljene
-korisnike, i ispisujemo njihova korisnička imena novopridošlom korisniku. Zatim
-ga tražimo da upiše svoje korisničko ime, s time da klijent provjerava postoji li
+korisnike, i ispisujemo njihova korisnička imena novopridošlom korisniku. 
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/welcome.jpg}
+\caption{Poruka dobrodošlice, broj prijavljenih korisnika i ispis njihovih korisničkih imena}
+\end{minipage}
+\end{figure}
+
+Zatim ga tražimo da upiše svoje korisničko ime, s time da server provjerava postoji li
 već korisničko ime, i u tom slučaju traži korisnika da upiše drugo korisničko ime.
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/invalid_username.jpg}
+\caption{Nemogućnost unosa već postojećeg korisničkog imena}
+\end{minipage}
+\end{figure}
+
+Također, unos korisničkog imena je obavezan pa ako ga nismo unijeli, dobivamo upozorenje da to moramo učiniti.
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/username_required.jpg}
+\caption{Unos korisničkog imena je obavezan}
+\end{minipage}
+\end{figure}
 
 Nakon prijave se svim korisnicima šalje obavijest da se novi korisnik prijavio
 u chat, i korisnik se dodaje u servis.
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/joining_notification.jpg}
+\caption{Korisnik se pridružje razgovoru}
+\end{minipage}
+\end{figure}
+
+Komunikacija se odvija na način da korisnik unese poruku koju zatim server prosljeđuje svim ostalim korisnicima koji su prijavljeni na chat.
+
+\newpage
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/comunication.jpg}
+\caption{Primjer jednostavne komumnikacije}
+\end{minipage}
+\end{figure}
+
+Korisnik može u bilo kojem trenutku napustiti razgovor te nakon što to učini, svi ostali korisnici dobivaju obavijest o tome.
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/leaving_notification.jpg}
+\caption{Korisnik napušta razgovor}
+\end{minipage}
+\end{figure}
 
 \section{Rasprava}
 
