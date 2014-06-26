@@ -5,3 +5,5 @@ D:\chat\ChatCli\ChatCli\bin\Debug\Chat.pdb
 D:\chat\ChatCli\ChatCli\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.exe
 D:\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.pdb
+C:\Users\Antonio\Documents\GitHub\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.exe
+C:\Users\Antonio\Documents\GitHub\chat\ChatCli\ChatCli\obj\x86\Debug\ChatCli.pdb
