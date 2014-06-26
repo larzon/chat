@@ -56,6 +56,34 @@ osoba odjavila iz chata.
 
 \subsection{Klijent}
 
-...
+U klijentu nalazimo TCP kanal servisa, i spojimo se na server. Ako servis
+nije upaljen, javljamo grešku.
+
+Zatim ispisujemo poruku dobrodošlice, i vadimo sa servisa sve trenutno prijavljene
+korisnike, i ispisujemo njihova korisnička imena novopridošlom korisniku. Zatim
+ga tražimo da upiše svoje korisničko ime, s time da klijent provjerava postoji li
+već korisničko ime, i u tom slučaju traži korisnika da upiše drugo korisničko ime.
+
+Nakon prijave se svim korisnicima šalje obavijest da se novi korisnik prijavio
+u chat, i korisnik se dodaje u servis.
+
+\section{Rasprava}
+
+Ova implementacija ima nekoliko prednosti. Jedna je da smo koristili Windowsove
+servise za server, umjesto da smo implementirali svoj vlastiti. Na taj način
+možemo biti sigurni da je taj server optimiziran i za veći broj korisnika.
+Druga je što danas programeri uglavnom provode vrijeme u komandnoj liniji,
+pa činjenica da je naša chat aplikacija napisana kao komandno-linijska aplikacija
+pruža takvim korisnicima već poznato okruženje. Treća prednost je to što kada
+zgasimo računalo, ugasi nam se i servis, pa nemamo problema sa eventualnim
+cachiranjem koje bi druge implementacije mogle napraviti.
+
+Neke mane naše implementacije su da, ukoliko korisnik zgasi prozor, naš servis
+ne registrira da se korisnik odjavio (jer je zapravo došlo do iznimke, a naš
+program trenutno ne obrađuje tu iznimku). Druga mana je da kada korisnik
+piše poruku, a u isto mu vrijeme stigne poruka od nekog drugog korisnika,
+zbog ograničenja komandne linije će mu pisanje vizualno prekinuti novopristigla
+poruka. Korisnik još uvijek može dovršiti svoju poruku, i normalno je poslati,
+samo mu se može učiniti da je došlo do greške.
 
 \end{document}
