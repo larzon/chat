@@ -45,13 +45,19 @@ osoba odjavila iz chata.
 \subsection{Server}
 
 \subsubsection{Kreiranje}
-Windows servis je program koji zapravo radi u pozadini dok je korisnik prijavljen na korisnički račun unutar Windows operativnog sustava. Podešavanjem
-konfiguracija u \texttt{Command Promptu} Windows servis postaje aktivan. Samo kreiranje Windows servisa (detaljnim opisom što radi) se vrši kodiranjem u \textit{C\#}.
-Najprije kreiramo novi projekt u \textit{C\#}, odabirući opciju Windows Service. Zatim
-rekonstruiramo metodu $OnStart$ - dodajemo k\^{o}d za otvaranje (instanciranje)
-kanala, registraciju objekata (dio tog koda \textit{C\#} doda automatski), itd. Zatim
-se instalacija vrši na jednostavan način preko Visual Studia, odnosno \texttt{Command
-Prompta}.
+Windows servis je program koji zapravo radi u pozadini dok je korisnik prijavljen na korisnički račun unutar Windows operativnog sustava. Podešavanjem konfiguracija u \texttt{Command Promptu} Windows servis postaje aktivan. Samo kreiranje Windows servisa (detaljnim opisom što radi) se vrši kodiranjem u \textit{C\#}.
+Najprije kreiramo novi projekt u \textit{C\#}, odabirući opciju Windows Service. 
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/create_service.jpg}
+\caption{Kreiranje Windows servisa}
+\end{minipage}
+\end{figure}
+
+Zatim rekonstruiramo metodu $OnStart$ - dodajemo k\^{o}d za otvaranje (instanciranje)
+kanala, registraciju objekata (dio tog koda \textit{C\#} doda automatski), itd.
 \lstset{style=sharpc}
 \begin{lstlisting}[numbers=left, breaklines=true]
 protected override void OnStart(string[] args) {
@@ -65,17 +71,28 @@ protected override void OnStart(string[] args) {
 
 \end{lstlisting}
 \subsubsection{Instaliranje}
-Za postavljanje servisa smo napomenuli da ga moramo konfigurirati najprije
-preko \texttt{Command Prompta}. Nakon prevođenja koda Windows servisa, dobivamo binarnu (izvršnu) datoteku Chat.exe. Najprije u \texttt{Command Promptu} trebamo otići u direktorij .NET Framework v. 4 naredbom:\\
+Najprije je potrebno dodati instalaciju za Windows servisu. To radimo u Design view-u datoteke ChatService.cs tako da u Properties kliknemo Add Installer.
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/add_installer.jpg}
+\caption{Dodavanje instalacije za Windows servis}
+\end{minipage}
+\end{figure}
+
+Zatim ga preko \texttt{Command Prompta} instaliramo. Nakon prevođenja koda Windows servisa, dobivamo binarnu (izvršnu) datoteku Chat.exe. U \texttt{Command Promptu} trebamo otići u direktorij .NET Framework v. 4 naredbom:\\
 \texttt{cd "C:$\backslash$Windows$\backslash$Microsoft.NET$\backslash$Framework64$\backslash$v4.0.30319"}\\
 Potom naredbom:\\
 \texttt{installutil "C:$\backslash$Ciljni\_ direktorij$\backslash$Chat$\backslash$bin$\backslash$Debug$\backslash$Chat.exe"}\\
-instaliramo dani windows servis.
+instaliramo dani Windows servis.
+
 \subsubsection{Pokretanje}
 Pokretanje servisa se vrši na sljedeći način: pokrenemo \texttt{Administrative tools}
 preko \texttt{Control Panela} (ili preko \texttt{Search programs and files} na startnoj liniji Windowsa. Zatim odaberemo opciju \texttt{Services} u kojoj nađemo \texttt{ChatService}
 (tako smo nazvali naš servis). Lijevim odabirom na opciju \texttt{Start} pokrećemo
 dani servis.
+
 \begin{figure}[!ht]
 \begin{minipage}{\textwidth}
 \centering
@@ -85,6 +102,18 @@ dani servis.
 \end{figure}
 
 \subsection{Klijent}
+
+Klijent povezujemo s Windows servisom tako da u reference uz System.Runtime.Remoting dodajemo i .exe servisa.
+
+\newpage
+
+\begin{figure}[!ht]
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=\textwidth]{images/add_reference_service.jpg}
+\caption{Dodavanje reference za servis ChatService}
+\end{minipage}
+\end{figure}
 
 U klijentu nalazimo TCP kanal servisa, i spojimo se na server. Ako servis
 nije upaljen, javljamo grešku.
@@ -124,6 +153,8 @@ Također, unos korisničkog imena je obavezan pa ako ga nismo unijeli, dobivamo 
 Nakon prijave se svim korisnicima šalje obavijest da se novi korisnik prijavio
 u chat, i korisnik se dodaje u servis.
 
+\newpage
+
 \begin{figure}[!ht]
 \begin{minipage}{\textwidth}
 \centering
@@ -134,8 +165,6 @@ u chat, i korisnik se dodaje u servis.
 
 Komunikacija se odvija na način da korisnik unese poruku koju zatim server prosljeđuje svim ostalim korisnicima koji su prijavljeni na chat.
 
-\newpage
-
 \begin{figure}[!ht]
 \begin{minipage}{\textwidth}
 \centering
@@ -145,6 +174,8 @@ Komunikacija se odvija na način da korisnik unese poruku koju zatim server pros
 \end{figure}
 
 Korisnik može u bilo kojem trenutku napustiti razgovor te nakon što to učini, svi ostali korisnici dobivaju obavijest o tome.
+
+\newpage
 
 \begin{figure}[!ht]
 \begin{minipage}{\textwidth}
